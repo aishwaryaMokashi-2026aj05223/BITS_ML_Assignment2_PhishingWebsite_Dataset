@@ -20,7 +20,7 @@ Classify a website as **phishing** or **legitimate** from 30 features extracted 
 https://github.com/aishwaryaMokashi-2026aj05223/BITS_ML_Assignment2_PhishingWebsite_Dataset 
 
 Live Streamlit app: 
-<PASTE YOUR STREAMLIT URL HERE>
+https://bitsaishwaryamokashimlassignment2.streamlit.app/ 
 
 ## d. Models used
 All metrics are computed on the held-out test set (`test_data.csv`, 1,170 rows). It is a binary problem, so Precision, Recall and F1 are for the positive class (**Phishing**), and AUC is computed from the predicted probability of phishing.
