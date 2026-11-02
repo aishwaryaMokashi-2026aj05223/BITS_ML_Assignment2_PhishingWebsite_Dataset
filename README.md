@@ -19,7 +19,8 @@ Classify a website as **phishing** or **legitimate** from 30 features extracted 
 ## c. GitHub repository link
 https://github.com/aishwaryaMokashi-2026aj05223/BITS_ML_Assignment2_PhishingWebsite_Dataset 
 
-Live Streamlit app: <PASTE YOUR STREAMLIT URL HERE>
+Live Streamlit app: 
+<PASTE YOUR STREAMLIT URL HERE>
 
 ## d. Models used
 All metrics are computed on the held-out test set (`test_data.csv`, 1,170 rows). It is a binary problem, so Precision, Recall and F1 are for the positive class (**Phishing**), and AUC is computed from the predicted probability of phishing.
@@ -40,8 +41,8 @@ Model settings: Logistic Regression (max_iter=3000), Decision Tree (max_depth=12
 
 | ML Model Name | Observation about model performance |
 |---|---|
-| Logistic Regression | A strong linear baseline: 91.8% accuracy and the third-best AUC (0.9776), with balanced precision (0.925) and recall (0.916). It matches KNN on MCC (0.8358) but trails the Decision Tree and SVM, which suggests some non-linear interaction between the features that a linear boundary cannot capture. |
-| Decision Tree | Second-best on accuracy (0.9239), F1 (0.9256) and MCC (0.8479), and very interpretable. It has the lowest AUC (0.9574) among the non-Naive-Bayes models, because a tree with limited depth gives coarse probability estimates, so its ranking quality is weaker than its hard predictions. |
+| Logistic Regression | A strong linear baseline: 91.8% accuracy and the second-best AUC (0.9776, behind only the SVM), with balanced precision (0.925) and recall (0.916). It matches KNN on MCC (0.8358) but trails the Decision Tree and SVM, which suggests some non-linear interaction between the features that a linear boundary cannot capture. |
+| Decision Tree | Second-best on accuracy (0.9239), F1 (0.9256) and MCC (0.8479), and very interpretable. It has the lowest AUC of all five models (0.9574), because a tree with limited depth gives coarse probability estimates, so its ranking quality is weaker than its hard predictions. |
 | KNN | Accuracy equals Logistic Regression (0.9179) and MCC is the same (0.8358). It has the highest recall among the three simple models (0.9288) but slightly lower precision (0.9137), so it flags a few more legitimate sites as phishing. Prediction is slower than the others because it compares against all stored training rows. |
 | Naive Bayes | Clearly the weakest: accuracy 0.6547 and MCC 0.4141. Recall is 1.0 but precision is only 0.5992, so it labels almost every site as phishing and misclassifies most legitimate sites. The AUC is still high (0.9642), meaning it ranks sites well but its decision threshold is badly off. The independence assumption does not hold because many features are strongly correlated, which makes its probabilities over-confident. |
 | Support Vector Machine | Best on every metric except recall-by-NB: accuracy 0.9444, AUC 0.9869, precision 0.9514, F1 0.9459 and MCC 0.8889. The RBF kernel captures non-linear interactions between the features, giving the most reliable balance of catching phishing sites and avoiding false alarms. The cost is longer training time than the other models. |
