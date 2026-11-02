@@ -1,3 +1,4 @@
+import os
 import joblib
 import pandas as pd
 import streamlit as st
@@ -7,6 +8,7 @@ from sklearn.metrics import confusion_matrix, classification_report
 from utils import compute_metrics, encode_target, CLASS_NAMES
 
 TARGET = "Result"
+SAMPLE_PATH = "test_data.csv"   # bundled test file, loaded automatically
 MODELS = {
     "Logistic Regression": "logistic_regression",
     "Decision Tree": "decision_tree",
@@ -26,6 +28,9 @@ with st.sidebar:
     file = st.file_uploader("Upload test CSV (30 features + 'Result')", type="csv")
     st.markdown("**Target `Result`:** `-1` = Phishing, `1` = Legitimate")
     st.markdown("Phishing is treated as the positive class for Precision / Recall / F1.")
+    if os.path.exists(SAMPLE_PATH):
+        st.download_button("Download test_data.csv", open(SAMPLE_PATH, "rb").read(),
+                           file_name="test_data.csv", mime="text/csv")
 
 
 @st.cache_resource
@@ -33,11 +38,16 @@ def load_model(key):
     return joblib.load(f"model/{key}.joblib")
 
 
-if file is None:
+if file is not None:
+    df = pd.read_csv(file)
+    source = f"uploaded file `{file.name}`"
+elif os.path.exists(SAMPLE_PATH):
+    df = pd.read_csv(SAMPLE_PATH)
+    source = "bundled `test_data.csv` (upload a CSV in the sidebar to replace it)"
+else:
     st.info("Upload `test_data.csv` from the repo to begin.")
     st.stop()
 
-df = pd.read_csv(file)
 if TARGET not in df.columns:
     st.error(f"Missing target column '{TARGET}'.")
     st.stop()
@@ -57,7 +67,7 @@ if unknown:
 X, y = df[expected], encode_target(df[TARGET])
 pred = model.predict(X)
 
-st.success(f"Loaded {len(df):,} rows, {len(expected)} features.")
+st.success(f"Using {source}: {len(df):,} rows, {len(expected)} features.")
 tab1, tab2, tab3 = st.tabs(["📊 Metrics", "🧩 Confusion matrix & report", "🏆 All models"])
 
 with tab1:
