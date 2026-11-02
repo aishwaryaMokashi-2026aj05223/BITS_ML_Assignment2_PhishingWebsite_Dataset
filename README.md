@@ -17,7 +17,7 @@ Classify a website as **phishing** or **legitimate** from 30 features extracted 
 - **Split sizes:** train 4,679 rows (2,415 phishing / 2,264 legitimate); test 1,170 rows (604 phishing / 566 legitimate), saved as `test_data.csv`.
 
 ## c. GitHub repository link
-<PASTE YOUR GITHUB REPO URL HERE>
+https://github.com/aishwaryaMokashi-2026aj05223/BITS_ML_Assignment2_PhishingWebsite_Dataset 
 
 Live Streamlit app: <PASTE YOUR STREAMLIT URL HERE>
 
@@ -72,3 +72,4 @@ streamlit run app.py
 Then upload `test_data.csv` in the app sidebar, pick a model, and view the metrics, the confusion matrix and the classification report. The "All models" tab compares all five models on the uploaded file.
 
 The saved `.joblib` models were trained with scikit-learn 1.6.1, so `requirements.txt` pins that exact version.
+
