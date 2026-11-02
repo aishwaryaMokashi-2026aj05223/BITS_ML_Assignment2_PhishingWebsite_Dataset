@@ -1,0 +1,11 @@
+streamlit
+scikit-learn==1.6.1
+numpy
+pandas
+scipy
+matplotlib
+seaborn
+joblib
+tabulate
+openpyxl
+ucimlrepo
